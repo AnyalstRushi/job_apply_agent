@@ -1,138 +1,163 @@
-﻿# Job Review Agent
+<div align="center">
 
-## Project overview
+# 🤖 Job Apply Agent
 
-This project is a local Python tool for reviewing job listings against a candidate profile. It runs on a Windows workstation, opens a visible browser, and uses the browser-use agent and a Google Gemini model to compare a listing with profile text and print a concise match summary.
+**An intelligent Python automation project for organizing and streamlining job-search workflows.**
 
-The current implementation is intentionally limited to review and recommendation. It does not submit applications, fill forms, or bypass website restrictions.
+![Python](https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![AI Automation](https://img.shields.io/badge/Focus-AI%20Automation-22D3EE?style=for-the-badge)
+![Career Tech](https://img.shields.io/badge/Domain-Career%20Technology-A78BFA?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Active%20Project-22C55E?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-94A3B8?style=for-the-badge)
 
-## Features present in the current code
+[![View Presentation](https://img.shields.io/badge/📊_View-Interactive_Presentation-0EA5E9?style=for-the-badge)](docs/PRESENTATION.html)
+[![Requirements](https://img.shields.io/badge/📝_View-Project_Requirements-8B5CF6?style=for-the-badge)](docs/PROJECT_REQUIREMENTS.md)
+[![Presentation Doc](https://img.shields.io/badge/🎯_View-Project_Presentation-6366F1?style=for-the-badge)](docs/PROJECT_PRESENTATION.md)
 
-The repository currently implements the following behavior in `main.py`:
+</div>
 
-- loads a candidate profile from `my_profile.txt`
-- validates that `GOOGLE_API_KEY` exists in a local `.env` file
-- searches a configured job title and location on Indeed
-- opens the site in a visible browser using Playwright
-- reviews up to `MAX_JOBS_TO_REVIEW` relevant listings
-- compares each listing to the profile text
-- prints a final table with:
-  - Job title
-  - Company
-  - Location
-  - Match reason
-  - Recommendation
+---
 
-The task prompt explicitly states the following restrictions:
+## 🚀 Overview
 
-- no Apply
-- no Easy Apply
-- no Submit
-- no Sign In
-- no Create Account
-- no form filling
-- no CAPTCHA bypass
-- no OTP bypass
-- no login, payment, or verification bypass
+**Job Apply Agent** is a Python-based AI automation project designed to reduce repetitive job-search and application-management work.
 
-This is a review workflow, not an automated job application workflow.
+Instead of manually handling every job opportunity, requirement, and application status, this project provides a structured automation workflow that can be extended into a more intelligent career-assistant system.
 
-## Technology stack
+> **Goal:** Help job seekers spend less time on repetitive tasks and more time on skill development, interview preparation, and career growth.
 
-The repository currently declares and uses the following technologies:
+---
 
-- Python 3.11+ recommended
-- `browser-use>=0.12.0`
-- `playwright>=1.45`
-- `python-dotenv>=1.0`
-- Google Gemini model: `gemini-3-flash-preview`
-- Playwright Chromium browser
+## 🎯 Problem It Solves
 
-## Windows setup commands
+Job seekers often manage multiple opportunities across different platforms. This creates repetitive work:
 
-```powershell
-cd Desktop\job_apply_agent
-python -m venv venv
-venv\Scripts\activate
+- Searching and reviewing job listings
+- Comparing job requirements with personal skills
+- Tracking applications and follow-ups
+- Maintaining application status across opportunities
+- Repeating similar career-workflow tasks manually
+
+**Job Apply Agent** provides a structured foundation to automate and organize these workflows responsibly.
+
+---
+
+## 🧠 How It Works
+
+```mermaid
+flowchart LR
+A[Job Opportunity] --> B[User Profile /
+Requirements]
+B --> C[Python Agent]
+C --> D[Processing Logic]
+D --> E[Structured Output]
+E --> F[User Review &
+Application Decision]
+```
+
+The project follows a modular, extensible approach: job-related input is processed through a Python automation workflow and converted into organized output for user review.
+
+---
+
+## ✨ Key Highlights
+
+| Area | Description |
+|---|---|
+| 🤖 AI Automation | Built around practical automation and agent-workflow concepts |
+| 🐍 Python First | Simple, readable, and extensible Python-based design |
+| 🗂️ Structured Workflow | Organizes job-related information for easier decision-making |
+| 🔒 Responsible Automation | Designed for user-reviewed workflows, not unsafe automatic actions |
+| 📈 Extensible | Ready for future AI, matching, tracking, and reporting features |
+| 📚 Documentation | Includes interactive presentation, requirements, and project walkthrough |
+
+---
+
+## 🛠️ Technology Stack
+
+<div align="center">
+
+![Python](https://img.shields.io/badge/Python-Programming_Language-3776AB?style=flat-square&logo=python&logoColor=white)
+![Automation](https://img.shields.io/badge/Workflow-Automation-22D3EE?style=flat-square)
+![AI Agents](https://img.shields.io/badge/Concept-AI_Agents-A78BFA?style=flat-square)
+![Career Tech](https://img.shields.io/badge/Domain-Career_Technology-6366F1?style=flat-square)
+
+</div>
+
+---
+
+## ⚙️ Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/AnyalstRushi/job_apply_agent.git
+cd job_apply_agent
+```
+
+### 2. Install dependencies
+
+```bash
 pip install -r requirements.txt
-python -m playwright install chromium
-copy .env.example .env
 ```
 
-Then add your API key to `.env`:
+### 3. Run the project
 
-```env
-GOOGLE_API_KEY=your_google_api_key_here
-```
-
-Create a local `my_profile.txt` with the candidate summary you want the agent to compare against the job descriptions.
-
-## How to run the project
-
-1. Ensure the virtual environment is activated.
-2. Confirm `.env` contains a valid `GOOGLE_API_KEY`.
-3. Confirm `my_profile.txt` exists and is not empty.
-4. Review the constants near the top of `main.py`:
-
-```python
-JOB_TITLE = "Azure Data Engineer"
-LOCATION = "Pune, Maharashtra, India"
-JOB_SITE_URL = "https://in.indeed.com"
-MAX_JOBS_TO_REVIEW = 2
-```
-
-5. Run:
-
-```powershell
+```bash
 python main.py
 ```
 
-The browser will open in visible mode and the agent will review the configured listings. The terminal will print the final summary table.
+---
 
-## Example output
+## 📁 Project Structure
 
 ```text
-================ JOB REVIEW SUMMARY ================
-
-Job title | Company | Location | Match reason | Recommendation
-Azure Data Engineer | Example Company | Pune, Maharashtra, India | Strong match for data engineering responsibilities and cloud data platform work. | Consider for follow-up
+job_apply_agent/
+├── main.py                        # Main automation workflow
+├── requirements.txt               # Project dependencies
+├── README.md                      # Project documentation
+├── docs/
+│   ├── PRESENTATION.html          # Interactive project presentation
+│   ├── PROJECT_REQUIREMENTS.md    # Business and functional requirements
+│   └── PROJECT_PRESENTATION.md    # Slide-by-slide project walkthrough
+└── .gitignore
 ```
 
-This example is illustrative only. The actual result depends on the current listing content and the profile text in `my_profile.txt`.
+---
 
-## Safety limitations
+## 🔮 Future Roadmap
 
-This repository is intentionally constrained to safe, human-supervised review behavior.
+- [ ] Job-description parsing and skill extraction  
+- [ ] Resume-to-job match scoring  
+- [ ] Application-status dashboard  
+- [ ] Interview-question suggestions  
+- [ ] Integration with approved job boards and productivity tools  
+- [ ] AI-generated application summaries with user review  
 
-- No automatic job application is performed.
-- No Apply, Easy Apply, Submit, Sign In, CAPTCHA, OTP, or form filling is attempted.
-- The workflow is bounded to reading listings and comparing them against the profile.
-- The browser remains visible so the user can observe and intervene at any time.
-- The project does not bypass login, payment, verification, or account restrictions.
+---
 
-## Known limitations
+## 📑 Project Documents
 
-- The script currently targets a single site: Indeed.
-- The search is set by static constants in `main.py` rather than a dynamic config file.
-- The review count is fixed at two listings by `MAX_JOBS_TO_REVIEW`.
-- The browser automation depends on the current behavior and stability of the external site.
-- The model is `gemini-3-flash-preview`, which is a preview model and may vary in output quality.
-- The project relies on a local profile file and therefore requires human-maintained profile text.
+| Document | Description |
+|---|---|
+| [📊 Interactive Presentation](docs/PRESENTATION.html) | Visual project presentation |
+| [📝 Project Requirements](docs/PROJECT_REQUIREMENTS.md) | Business, functional, and workflow requirements |
+| [🎯 Project Presentation](docs/PROJECT_PRESENTATION.md) | Slide-by-slide project walkthrough |
 
-## Future roadmap
+---
 
-The following capabilities are planned and not yet implemented in the current codebase:
+## 🤝 Contributing
 
-- broader job-board support beyond Indeed
-- multi-role or multi-location search configuration
-- structured profile parsing and scoring
-- result export to CSV or JSON
-- recurring scheduled review runs
-- richer recommendation and ranking models
+Suggestions, improvements, and feature ideas are welcome. Please open an issue before submitting major changes.
 
-For architecture and support details, see the documentation in the `docs/` directory:
+---
 
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
-- [docs/SECURITY.md](docs/SECURITY.md)
-- [docs/OPERATIONS.md](docs/OPERATIONS.md)
-- [docs/ROADMAP.md](docs/ROADMAP.md)
+## 📫 Connect
+
+<div align="center">
+
+**Rushi Wavhal**  
+[GitHub](https://github.com/AnyalstRushi) • rushiwavhal33@gmail.com
+
+⭐ If you find this project useful, consider starring the repository.
+
+</div>
