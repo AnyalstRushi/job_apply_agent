@@ -4,143 +4,178 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Job Apply Agent — AI Automation Project</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#070b18;--card:#101830;--accent:#22d3ee;--accent2:#a78bfa;--text:#e8edf7;--muted:#9aa7bd}
+:root{--bg:#060913;--panel:#0d1426;--panel2:#111a33;--accent:#22d3ee;--accent2:#a78bfa;--gold:#fbbf24;--text:#eaf0fb;--muted:#9fb0c9;--line:rgba(148,163,184,.18)}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:radial-gradient(1100px 550px at 85% -10%,rgba(34,211,238,.18),transparent),radial-gradient(900px 500px at 5% 110%,rgba(167,139,250,.18),transparent),var(--bg);color:var(--text);min-height:100vh}
-.deck{max-width:1080px;margin:auto;padding:48px 22px 80px}
-.slide{background:linear-gradient(145deg,rgba(16,24,48,.97),rgba(9,14,30,.97));border:1px solid rgba(148,163,184,.18);border-radius:24px;padding:42px;margin-bottom:26px;box-shadow:0 22px 55px rgba(0,0,0,.35)}
-.tag{display:inline-block;background:rgba(34,211,238,.12);color:var(--accent);border:1px solid rgba(34,211,238,.35);padding:7px 14px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
-h1{font-size:clamp(32px,6vw,58px);line-height:1.05;margin:16px 0 12px;background:linear-gradient(90deg,#fff,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
-h2{font-size:clamp(24px,4vw,34px);margin-bottom:14px}
-h3{color:var(--accent);margin:16px 0 8px}
-p,li{color:var(--muted);font-size:17px;line-height:1.65}
-ul{padding-left:22px;margin-top:10px}
-li{margin:8px 0}
-strong{color:#fff}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px;margin-top:20px}
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(148,163,184,.16);border-radius:18px;padding:20px}
-.card b{display:block;color:#fff;font-size:18px;margin-bottom:6px}
-.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
-.step{background:rgba(167,139,250,.1);border:1px solid rgba(167,139,250,.35);color:#fff;padding:12px 16px;border-radius:14px;font-weight:600}
-.arrow{color:var(--accent);font-size:22px}
-.footer{margin-top:18px;color:var(--muted);font-size:14px}
-.badge{display:inline-block;margin:6px 6px 0 0;background:rgba(255,255,255,.06);border:1px solid rgba(148,163,184,.2);padding:6px 12px;border-radius:999px;font-size:13px;color:#dbeafe}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 500px at 85% -5%,rgba(34,211,238,.16),transparent),radial-gradient(800px 500px at 5% 105%,rgba(167,139,250,.16),transparent),radial-gradient(600px 400px at 50% 50%,rgba(251,191,36,.05),transparent)}
+.progress{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--gold));z-index:99;transition:width .15s ease}
+.deck{max-width:1120px;margin:auto;padding:56px 22px 90px}
+.slide{position:relative;background:linear-gradient(145deg,rgba(13,20,38,.97),rgba(8,12,25,.97));border:1px solid var(--line);border-radius:26px;padding:clamp(30px,5vw,52px);margin-bottom:30px;box-shadow:0 25px 65px rgba(0,0,0,.42);opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.slide.visible{opacity:1;transform:none}
+.slide::before{content:"";position:absolute;inset:0;border-radius:26px;background:linear-gradient(120deg,rgba(34,211,238,.08),transparent 35%,rgba(167,139,250,.08));pointer-events:none}
+.tag{display:inline-block;font-family:'Sora',sans-serif;background:rgba(34,211,238,.1);color:var(--accent);border:1px solid rgba(34,211,238,.32);padding:8px 15px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+h1{font-family:'Sora',sans-serif;font-size:clamp(36px,6.5vw,66px);line-height:1.03;margin:18px 0 14px;background:linear-gradient(92deg,#fff,var(--accent) 45%,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-family:'Sora',sans-serif;font-size:clamp(26px,4.2vw,40px);line-height:1.15;margin-bottom:16px}
+h3{font-family:'Sora',sans-serif;color:var(--accent);margin:18px 0 9px;font-size:19px}
+p,li{color:var(--muted);font-size:17px;line-height:1.7}
+ul{padding-left:22px;margin-top:12px}
+li{margin:9px 0}
+strong,b{color:#fff}
+.lead{font-size:19px;color:#c9d6ea;max-width:760px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:16px;margin-top:24px}
+.card{position:relative;background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;padding:22px;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.card:hover{transform:translateY(-6px);border-color:rgba(34,211,238,.45);box-shadow:0 18px 40px rgba(34,211,238,.12)}
+.card b{display:block;font-family:'Sora',sans-serif;color:#fff;font-size:18px;margin-bottom:7px}
+.card p{font-size:15px}
+.kpi{font-family:'Sora',sans-serif;font-size:34px;font-weight:800;color:var(--accent)}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:22px}
+.step{background:rgba(167,139,250,.09);border:1px solid rgba(167,139,250,.32);color:#fff;padding:13px 17px;border-radius:15px;font-weight:600;font-size:15px}
+.arrow{color:var(--accent);font-size:23px}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.badge{background:rgba(255,255,255,.055);border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-size:13px;color:#dbeafe}
+.cta{display:inline-flex;align-items:center;gap:9px;margin:16px 8px 0 0;background:linear-gradient(92deg,var(--accent),var(--accent2));color:#04121f;font-weight:800;padding:13px 21px;border-radius:14px;text-decoration:none;transition:transform .25s ease,box-shadow .25s ease}
+.cta:hover{transform:translateY(-3px);box-shadow:0 16px 35px rgba(34,211,238,.22)}
+.cta.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.footer{margin-top:22px;color:var(--muted);font-size:14px}
+.hero-actions{margin-top:24px}
+@media print{.progress{display:none}.slide{opacity:1!important;transform:none!important;page-break-after:always;box-shadow:none;border-color:#ccc}.bg{display:none}body{background:#fff;color:#111}.card,.step{background:#f7f8fb;border-color:#ddd}.card b,.step,strong,b{color:#111}.card p,li,p{color:#333}.cta{display:none}}
 </style>
 </head>
 <body>
+<div class="bg"></div>
+<div class="progress" id="progress"></div>
 <main class="deck">
 
 <section class="slide">
-<span class="tag">AI Automation • Python</span>
+<span class="tag">AI Automation • Python • Career Technology</span>
 <h1>Job Apply Agent</h1>
-<p>An AI-powered automation project designed to reduce repetitive job-search and application-management work.</p>
+<p class="lead">An intelligent Python automation project designed to organize job-search workflows, reduce repetitive career tasks, and create a foundation for AI-powered career assistance.</p>
+<div class="hero-actions">
+<a class="cta" href="#workflow">Explore Workflow →</a>
+<a class="cta ghost" href="PROJECT_REQUIREMENTS.md">Read Requirements</a>
+</div>
 <div class="footer">Rushi Wavhal • Python • AI Automation</div>
 </section>
 
 <section class="slide">
 <span class="tag">Business Context</span>
-<h2>Job searching is repetitive</h2>
-<p>Job seekers spend significant time searching listings, reviewing requirements, tailoring applications, and tracking progress across multiple platforms.</p>
+<h2>Job searching should not feel repetitive</h2>
+<p class="lead">Candidates manage opportunities, requirements, applications, and follow-ups across multiple platforms. Job Apply Agent focuses on bringing structure to this workflow.</p>
 <div class="grid">
-<div class="card"><b>Job Discovery</b>Find relevant opportunities efficiently</div>
-<div class="card"><b>Requirement Matching</b>Compare skills with job requirements</div>
-<div class="card"><b>Application Support</b>Organize application-ready information</div>
-<div class="card"><b>Progress Tracking</b>Maintain visibility across opportunities</div>
+<div class="card"><b>🎯 Job Discovery</b><p>Organize relevant opportunities in one structured workflow.</p></div>
+<div class="card"><b>🧩 Requirement Review</b><p>Compare job requirements with a candidate profile more consistently.</p></div>
+<div class="card"><b>🗂️ Application Support</b><p>Maintain application-ready information in an organized format.</p></div>
+<div class="card"><b>📈 Progress Visibility</b><p>Create a foundation for tracking opportunities and follow-ups.</p></div>
 </div>
 </section>
 
 <section class="slide">
 <span class="tag">Problem Statement</span>
-<h2>Manual workflows slow candidates down</h2>
+<h2>Manual career workflows slow candidates down</h2>
 <ul>
-<li>Relevant jobs are scattered across multiple sources.</li>
+<li>Relevant opportunities are scattered across multiple platforms.</li>
 <li>Comparing job requirements with a candidate profile takes time.</li>
 <li>Application status and follow-ups are difficult to track.</li>
 <li>Repetitive tasks reduce time available for interview preparation.</li>
 </ul>
-</section>
-
-<section class="slide">
-<span class="tag">Objective</span>
-<h2>Automate the repetitive work</h2>
-<p>Job Apply Agent is designed to assist with structured job-search automation, helping users organize opportunities and application-related information more efficiently.</p>
-<div class="grid">
-<div class="card"><b>Efficiency</b>Reduce repetitive manual effort</div>
-<div class="card"><b>Organization</b>Maintain structured opportunity information</div>
-<div class="card"><b>Consistency</b>Apply a repeatable workflow</div>
-<div class="card"><b>Focus</b>Save time for interviews and skill development</div>
+<div class="badges">
+<span class="badge">Repetitive work</span><span class="badge">Scattered information</span><span class="badge">Manual tracking</span><span class="badge">Limited focus</span>
 </div>
 </section>
 
 <section class="slide">
+<span class="tag">Project Objective</span>
+<h2>Bring structure to career automation</h2>
+<p class="lead">Job Apply Agent is designed to assist with structured job-search automation while keeping the user in control of every important decision.</p>
+<div class="grid">
+<div class="card"><span class="kpi">Less</span><b>Manual repetition</b><p>Reduce repetitive career-workflow tasks.</p></div>
+<div class="card"><span class="kpi">More</span><b>Organization</b><p>Maintain structured opportunity information.</p></div>
+<div class="card"><span class="kpi">Human</span><b>Decision control</b><p>Support user-reviewed automation.</p></div>
+</div>
+</section>
+
+<section class="slide" id="workflow">
 <span class="tag">Solution Workflow</span>
-<h2>From opportunity to action</h2>
+<h2>From opportunity to informed action</h2>
 <div class="flow">
 <span class="step">Job Opportunity</span><span class="arrow">→</span>
-<span class="step">Profile / Requirements</span><span class="arrow">→</span>
-<span class="step">Agent Processing</span><span class="arrow">→</span>
+<span class="step">Profile & Requirements</span><span class="arrow">→</span>
+<span class="step">Python Agent</span><span class="arrow">→</span>
 <span class="step">Structured Output</span><span class="arrow">→</span>
-<span class="step">Application Decision</span>
+<span class="step">User Review</span>
 </div>
-<h3>Agent Capabilities</h3>
+<h3>Agent capabilities</h3>
 <ul>
-<li>Process job-related input in a structured workflow</li>
-<li>Support automation logic using Python</li>
-<li>Generate organized output for review</li>
-<li>Provide a foundation for extending AI-powered features</li>
+<li>Process job-related input through a structured Python workflow.</li>
+<li>Provide an extensible base for AI-powered career features.</li>
+<li>Generate organized output for user review.</li>
+<li>Support responsible, human-controlled automation.</li>
 </ul>
 </section>
 
 <section class="slide">
 <span class="tag">Architecture</span>
-<h2>Project architecture</h2>
+<h2>Modular and extensible design</h2>
 <div class="flow">
 <span class="step">User Input</span><span class="arrow">→</span>
 <span class="step">Python Agent</span><span class="arrow">→</span>
 <span class="step">Processing Logic</span><span class="arrow">→</span>
 <span class="step">Output / Report</span>
 </div>
-<h3>Technology</h3>
-<div>
-<span class="badge">Python</span><span class="badge">Automation</span><span class="badge">AI Workflow</span><span class="badge">CLI / Scripting</span><span class="badge">Extensible Design</span>
+<h3>Technology focus</h3>
+<div class="badges">
+<span class="badge">Python</span><span class="badge">Automation</span><span class="badge">AI Workflow</span><span class="badge">Agent Concepts</span><span class="badge">Extensible Design</span>
 </div>
 </section>
 
 <section class="slide">
 <span class="tag">Use Cases</span>
-<h2>Who can use it?</h2>
-<ul>
-<li>Students and freshers managing multiple job applications</li>
-<li>Job seekers who want a structured application workflow</li>
-<li>Developers learning AI automation and agent-based workflows</li>
-<li>Users exploring practical Python automation projects</li>
-</ul>
+<h2>Designed for career-focused users</h2>
+<div class="grid">
+<div class="card"><b>🎓 Students & Freshers</b><p>Manage internship and job-application workflows.</p></div>
+<div class="card"><b>💼 Job Seekers</b><p>Organize opportunities and application information.</p></div>
+<div class="card"><b>🧑‍💻 Developers</b><p>Explore practical AI automation and agent workflows.</p></div>
+<div class="card"><b>🚀 Career Builders</b><p>Save time for skill development and interviews.</p></div>
+</div>
 </section>
 
 <section class="slide">
-<span class="tag">Roadmap</span>
-<h2>Future enhancements</h2>
+<span class="tag">Future Roadmap</span>
+<h2>Designed to grow</h2>
 <ul>
-<li>Job-description parsing and skill extraction</li>
-<li>Resume-to-job match scoring</li>
-<li>Application status dashboard</li>
-<li>Interview-question suggestions</li>
-<li>Integration with job boards and productivity tools</li>
+<li>Job-description parsing and skill extraction.</li>
+<li>Resume-to-job match scoring.</li>
+<li>Application-status dashboard.</li>
+<li>Interview-question suggestions.</li>
+<li>Integration with approved job boards and productivity tools.</li>
+<li>AI-generated application summaries with user review.</li>
 </ul>
 </section>
 
 <section class="slide">
 <span class="tag">Skills Demonstrated</span>
-<h2>What this project shows</h2>
-<div>
+<h2>Practical AI automation capability</h2>
+<div class="badges">
 <span class="badge">Python</span><span class="badge">AI Automation</span><span class="badge">Workflow Design</span><span class="badge">Problem Solving</span><span class="badge">Agent Concepts</span><span class="badge">Project Documentation</span>
 </div>
 <h3>Conclusion</h3>
-<p>Job Apply Agent demonstrates how AI and automation can reduce repetitive career workflows and create a foundation for more intelligent job-search tools.</p>
+<p class="lead">Job Apply Agent demonstrates how thoughtful automation can reduce repetitive career workflows while maintaining a responsible, user-reviewed approach.</p>
 <div class="footer">GitHub: github.com/AnyalstRushi • Email: rushiwavhal33@gmail.com</div>
 </section>
 
 </main>
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+const bar=document.getElementById('progress');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.18});
+slides.forEach(s=>io.observe(s));
+addEventListener('scroll',()=>{const h=document.documentElement;bar.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
+addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='PageDown'){const n=slides.find(s=>s.getBoundingClientRect().top>80);if(n)n.scrollIntoView({behavior:'smooth'})}});
+</script>
 </body>
 </html>
